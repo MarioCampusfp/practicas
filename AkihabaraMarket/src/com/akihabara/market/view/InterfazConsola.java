@@ -37,21 +37,25 @@ public class InterfazConsola {
 			    break;
 			//opcion para la creacion de un producto
 			case 2:
-				String nombre;
-				System.out.println("escribe el nombre del producto: ");
-				nombre = scanner.nextLine();
-				String categoria;
-				System.out.println("escribe la categoria del producto: ");
-				categoria = scanner.nextLine();
-				double precio;
-				System.out.println("escribe el precio del producto: ");
-				precio = Double.parseDouble(scanner.nextLine());
-				int stock;
-				System.out.println("escribe el stock del producto: ");
-				stock = Integer.parseInt(scanner.nextLine());
-				ProductoOtaku producto1 = new ProductoOtaku(nombre, categoria, precio, stock);
-				producto.agregarProducto(producto1);
-				break;
+				System.out.println("Escribe el tipo de producto (ej. figura, camiseta): ");
+			    String tipo = scanner.nextLine();
+			    System.out.println("Escribe la franquicia (ej. Naruto, One Piece): ");
+			    String franquicia = scanner.nextLine();
+
+			    LlmService llm = new LlmService();
+			    String nombreSugerido = llm.sugerirNombreProducto(tipo, franquicia);
+			    System.out.println("Nombre sugerido por IA: " + nombreSugerido);
+
+			    System.out.println("Escribe la categoria del producto: ");
+			    String categoria = scanner.nextLine();
+			    System.out.println("Escribe el precio del producto: ");
+			    double precio = Double.parseDouble(scanner.nextLine());
+			    System.out.println("Escribe el stock del producto: ");
+			    int stock = Integer.parseInt(scanner.nextLine());
+
+			    ProductoOtaku nuevoProducto = new ProductoOtaku(nombreSugerido, categoria, precio, stock);
+			    producto.agregarProducto(nuevoProducto);
+			    break;
 			//opcion para eliminar un producto
 			case 3:
 				int id;
@@ -127,6 +131,7 @@ public class InterfazConsola {
 				System.out.println("Saliendo de la aplicación...");
 				break;
 			//opcion por defecto
+			case 9:
 			default:
 				 System.out.println("Opción inválida. Intente de nuevo.");
 			}
