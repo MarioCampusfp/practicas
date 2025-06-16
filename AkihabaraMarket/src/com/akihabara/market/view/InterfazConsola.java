@@ -20,10 +20,12 @@ public class InterfazConsola {
 	}
 	//Ejecucion de la opcion del menu 
 	public void selecionmenu() {
+		
 		ProductoDAO producto = new ProductoDAO();
 		Scanner scanner = new Scanner(System.in);
 		int opcion;
 		do {
+			mostrarmenu();
 			System.out.println("Escribe la opcion del menu que desees: ");
 			opcion =Integer.parseInt(scanner.nextLine());
 			
@@ -65,6 +67,10 @@ public class InterfazConsola {
 				break;
 			//opcion para actualizar un producto
 			case 4:
+				int actualizar_id;
+				System.out.println("escribe la id del producto: ");
+				actualizar_id=scanner.nextInt();
+				scanner.nextLine();
 				String actualizado_nombre;
 				System.out.println("escribe el nombre del producto: ");
 				actualizado_nombre = scanner.nextLine();
@@ -77,7 +83,7 @@ public class InterfazConsola {
 				int actualizado_stock;
 				System.out.println("escribe el stock del producto: ");
 				actualizado_stock = Integer.parseInt(scanner.nextLine());
-				ProductoOtaku producto2 = new ProductoOtaku(actualizado_nombre, actualizado_categoria, actualizado_precio, actualizado_stock);
+				ProductoOtaku producto2 = new ProductoOtaku(actualizar_id, actualizado_nombre, actualizado_categoria, actualizado_precio, actualizado_stock);
 				producto.actualizarProducto(producto2);
 				break;
 			//opcion para buscar un producto por nombre

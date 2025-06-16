@@ -2,6 +2,7 @@ package com.akihabara.market.model;
 
 public class ProductoOtaku {
 	//atributos de la tabla productos de la base de datos
+	int id;
 	String nombre;
 	String categoria;
 	double precio;
@@ -11,8 +12,16 @@ public class ProductoOtaku {
 	public ProductoOtaku() {
 		
 	}
-	//contructo con todos los parametros
+	//contructo con todos los parametros menos id
 	public ProductoOtaku(String nombre, String categoria,double precio,int stock) {
+		this.nombre=nombre;
+		this.categoria=categoria;
+		this.precio=precio;
+		this.stock=stock;
+	}
+	//contructo con todos los parametros
+	public ProductoOtaku(int id,String nombre, String categoria,double precio,int stock) {
+		this.id=id;
 		this.nombre=nombre;
 		this.categoria=categoria;
 		this.precio=precio;
@@ -20,6 +29,12 @@ public class ProductoOtaku {
 	}
 	
 	//get y set del atributo de la tabla
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id=id;
+	}
 	public String getNombre() {
 		return nombre;
 	}

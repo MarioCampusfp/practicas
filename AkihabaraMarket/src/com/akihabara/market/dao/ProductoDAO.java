@@ -66,21 +66,22 @@ public class ProductoDAO {
 	        return lista; 
 	 }
 	 public boolean actualizarProducto(ProductoOtaku producto) {
-		 String sql = "UPDATE producto SET nombre = ?, categoria = ?, precio = ?, stock = ? WHERE nombre = ?";
-		 try (PreparedStatement stmt = db.getConexion().prepareStatement(sql)) {
-	            stmt.setString(1, producto.getNombre());
-	            stmt.setString(2, producto.getCategoria());
-	            stmt.setDouble(3, producto.getPrecio());
-	            stmt.setInt(4, producto.getStock());
-	            stmt.setString(5, producto.getNombre()); // Aquí se asume que el nombre es la clave
+		    String sql = "UPDATE producto SET nombre = ?, categoria = ?, precio = ?, stock = ? WHERE id = ?";
+		    try (PreparedStatement stmt = db.getConexion().prepareStatement(sql)) {
+		        stmt.setString(1, producto.getNombre());
+		        stmt.setString(2, producto.getCategoria());
+		        stmt.setDouble(3, producto.getPrecio());
+		        stmt.setInt(4, producto.getStock());
+		        stmt.setInt(5, producto.getId()); // El ID va aquí, como quinto parámetro
 
-	            int filas = stmt.executeUpdate();
-	            return filas > 0;
-	        } catch (SQLException e) {
-	            System.out.println("Error al actualizar producto: " + e.getMessage());
-	            return false;
-	        }
-	 }
+		        int filas = stmt.executeUpdate();
+		        return filas > 0;
+		    } catch (SQLException e) {
+		        System.out.println("Error al actualizar producto: " + e.getMessage());
+		        return false;
+		    }
+		}
+
 	 public boolean eliminarProducto(int id) {
 		 String sql = "DELETE FROM producto WHERE id = ?";
 		 try (PreparedStatement stmt = db.getConexion().prepareStatement(sql)) {
